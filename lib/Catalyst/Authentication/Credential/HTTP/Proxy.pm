@@ -8,12 +8,16 @@ use String::Escape ();
 use URI::Escape    ();
 use Catalyst::Authentication::Credential::HTTP::Proxy::User;
 
-our $VERSION = "0.04";
+our $VERSION = "0.05";
+
+__PACKAGE__->mk_accessors(qw/ 
+    url
+/);
 
 sub init {
     my ($self) = @_;
     
-    my $type = $self->_config->{'type'} ||= 'basic';
+    my $type = $self->type || 'basic';
     
     if (!$self->_config->{url}) {
         Catalyst::Exception->throw(__PACKAGE__ . " configuration does not include a 'url' key, cannot proceed");
@@ -22,6 +26,7 @@ sub init {
     if (!grep /^$type$/, ('basic')) {
         Catalyst::Exception->throw(__PACKAGE__ . " used with unsupported authentication type: " . $type);
     }
+    $self->type($type);
 }
 
 sub authenticate_basic {
@@ -34,7 +39,7 @@ sub authenticate_basic {
     if ( my ( $user, $password ) = $headers->authorization_basic ) {
         my $ua = Catalyst::Authentication::Credential::HTTP::Proxy::User->new;
         $ua->credentials($user, $password);
-        my $resp = $ua->get($self->_config->{url});
+        my $resp = $ua->get($self->url);
         if ( $resp->is_success ) {
             # Config username_field TODO
 	        my $user_obj = $realm->find_user( { username => $user }, $c);
@@ -56,6 +61,8 @@ sub authenticate_basic {
         return 0;
     }
 }
+
+1;
 
 __END__
 
@@ -102,7 +109,7 @@ for Catlayst.
 
 =head1 DESCRIPTION
 
-This moduule lets you use HTTP Proxy authentication with
+This module lets you use HTTP Proxy authentication with
 L<Catalyst::Plugin::Authentication>.
 
 Currently this module only supports the Basic scheme, but upon request Digest

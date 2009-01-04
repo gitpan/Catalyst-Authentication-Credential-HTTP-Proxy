@@ -12,6 +12,7 @@ inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/Catalyst/Authentication/Credential/HTTP/Proxy.pm
 lib/Catalyst/Authentication/Credential/HTTP/Proxy/User.pm
+lib/Catalyst/Authentication/Credential/HTTP/User.pm
 Makefile.PL
 MANIFEST			This list of files
 META.yml
@@ -21,4 +22,5 @@ t/live_app.t
 t/mock.t
 t/pod.t
 t/pod_coverage.t
+t/pod_spelling.t
 t/use.t

@@ -5,7 +5,7 @@ all_from 'lib/Catalyst/Authentication/Credential/HTTP/Proxy.pm';
 
 requires 'Catalyst::Runtime';
 requires 'Catalyst::Plugin::Authentication';
-requires 'Catalyst::Authentication::Credential::HTTP' => '1.005';
+requires 'Catalyst::Authentication::Credential::HTTP' => '1.009';
 requires 'LWP::Simple';
 build_requires 'Test::MockObject';
 build_requires 'Test::Exception';
