@@ -8,7 +8,7 @@ use String::Escape ();
 use URI::Escape    ();
 use Catalyst::Authentication::Credential::HTTP::Proxy::User;
 
-our $VERSION = "0.05";
+our $VERSION = "0.06";
 
 __PACKAGE__->mk_accessors(qw/ 
     url
@@ -71,7 +71,7 @@ __END__
 =head1 NAME
 
 Catalyst::Authentication::Credential::HTTP::Proxy - HTTP Proxy authentication
-for Catlayst.
+for Catalyst.
 
 =head1 SYNOPSIS
 
@@ -91,7 +91,7 @@ for Catlayst.
             store => {
                 class => 'Minimal',
                 users => {
-                    Mufasa => { password => "Circle Of Life", },
+                    Mufasa => { },
                 },
             },
         },
